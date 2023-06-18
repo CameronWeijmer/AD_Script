@@ -10,12 +10,14 @@ $selection = Read-Host "Geben die Nummer der Aktion ein"
 #Neue OU
 if ($selection -eq "1") {
     $ouName = Read-Host "Geben Sie den Namen der OU ein"
+    
     New-ADOrganizationalUnit -Name $ouName -Path "DC=bbw,DC=lab"
 }
 #Neue Gruppe erstellen
 elseif ($selection -eq "2") {
     $groupName = Read-Host "Geben Sie den Namen der Gruppe ein"
     $ouName = Read-Host "Geben Sie den Namen der Ou ein"
+
     New-ADGroup -Name $groupName -GroupCategory Security -GroupScope DomainLocal -Path "OU=$ouName,DC=bbw,DC=lab"
 }
 #Neuen Benutzer erstellen
@@ -30,6 +32,7 @@ elseif ($selection -eq "3") {
 
     #Benutzer hinzufügen
     $groupName = Read-Host "Geben Sie den Namen der Gruppe ein wo der Benutzer hinzugefügt wird"
+
     Add-ADGroupMember -Identity $groupName -Members $userName
 
 }
